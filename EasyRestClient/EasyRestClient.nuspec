@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>EasyRestClient</id>
+    <version>1.0.5</version>
+    <title>EasyRestClient</title>
+    <authors>Lionel Wu</authors>
+    <owners>Lionel Wu</owners>
+    <licenseUrl>https://github.com/PretenderX/EasyRestClient/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/PretenderX/EasyRestClient</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A lightly RESTful client development framework by using RestSharp.</description>
+    <releaseNotes>Add Ignored property to ParameterTypeAttribute</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>REST RestSharp</tags>
+  </metadata>
+</package>
