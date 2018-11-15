@@ -16,7 +16,7 @@ Spell correction of "Easy"</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="RestSharp" Version="105.2.3" />
+    <PackageReference Include="RestSharp" Version="106.1.0" />
   </ItemGroup>
 
 </Project>
