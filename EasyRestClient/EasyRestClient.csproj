@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
-    <version>1.0.6</version>
+    <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
+    <version>1.0.7</version>
     <PackageLicenseUrl>https://github.com/PretenderX/EasyRestClient/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/PretenderX/EasyRestClient</PackageProjectUrl>
     <PackageTags>REST RestSharp</PackageTags>
