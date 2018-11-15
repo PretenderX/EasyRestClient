@@ -3,7 +3,7 @@ using RestSharp;
 
 namespace EasyRestClient
 {
-    public interface IEsayRestClient
+    public interface IEasyRestClient
     {
         IRestResponse Execute(IEasyRestRequest request);
 

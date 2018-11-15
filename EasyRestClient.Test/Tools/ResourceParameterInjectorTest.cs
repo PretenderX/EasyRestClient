@@ -5,7 +5,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RestSharp;
 
-namespace EsayRestClient.Test.Tools
+namespace EasyRestClient.Test.Tools
 {
     public class TestRequest : IEasyRestRequest
     {

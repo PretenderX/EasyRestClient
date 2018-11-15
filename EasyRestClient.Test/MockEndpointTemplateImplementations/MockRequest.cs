@@ -1,7 +1,7 @@
 ﻿using EasyRestClient.EndpointTemplate;
 using RestSharp;
 
-namespace EsayRestClient.Test.MockEndpointTemplateImplementations
+namespace EasyRestClient.Test.MockEndpointTemplateImplementations
 {
     public class MockRequest : IEasyRestRequest<MockResponse>
     {

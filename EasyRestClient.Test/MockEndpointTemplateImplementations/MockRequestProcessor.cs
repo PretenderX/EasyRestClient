@@ -1,6 +1,6 @@
 ﻿using EasyRestClient.EndpointTemplate;
 
-namespace EsayRestClient.Test.MockEndpointTemplateImplementations
+namespace EasyRestClient.Test.MockEndpointTemplateImplementations
 {
     public class MockRequestProcessor : EasyRestRequestProcessorBase<MockRequest, MockResponse>
     {

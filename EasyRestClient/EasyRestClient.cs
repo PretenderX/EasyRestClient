@@ -7,13 +7,13 @@ using RestSharp;
 
 namespace EasyRestClient
 {
-    public class EsayRestClient : IEsayRestClient
+    public class EasyRestClient : IEasyRestClient
     {
         private readonly IEasyRestClientConfiguration _configuration;
         private readonly IEasyRestRequestProcessorFactory _requestProcessorFactory;
         private readonly IRestClient _restClient;
 
-        public EsayRestClient(IEasyRestClientConfiguration configuration,
+        public EasyRestClient(IEasyRestClientConfiguration configuration,
             IEasyRestRequestProcessorFactory requestProcessorFactory,
             IRestClient restClient)
         {

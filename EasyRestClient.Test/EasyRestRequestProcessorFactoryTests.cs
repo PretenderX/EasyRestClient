@@ -1,9 +1,8 @@
-﻿using EasyRestClient;
-using EsayRestClient.Test.MockEndpointTemplateImplementations;
+﻿using EasyRestClient.Test.MockEndpointTemplateImplementations;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace EsayRestClient.Test
+namespace EasyRestClient.Test
 {
     [TestClass]
     public class EasyRestRequestProcessorFactoryTests
