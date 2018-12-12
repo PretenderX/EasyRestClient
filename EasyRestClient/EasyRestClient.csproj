@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
-    <version>1.0.7</version>
+    <version>1.0.9</version>
     <PackageLicenseUrl>https://github.com/PretenderX/EasyRestClient/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/PretenderX/EasyRestClient</PackageProjectUrl>
     <PackageTags>REST RestSharp</PackageTags>
@@ -11,8 +11,7 @@
     <Authors>Lionel Wu</Authors>
     <Description>A lightly RESTful client development framework by using RestSharp.</Description>
     <Copyright></Copyright>
-    <PackageReleaseNotes>NetStandard 2.0 Support
-Spell correction of "Easy"</PackageReleaseNotes>
+    <PackageReleaseNotes>Setup rest client when executing request rather than in constructor.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

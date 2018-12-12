@@ -17,21 +17,15 @@ namespace EasyRestClient
             IEasyRestRequestProcessorFactory requestProcessorFactory,
             IRestClient restClient)
         {
-            this._configuration = configuration;
-            this._requestProcessorFactory = requestProcessorFactory;
-            this._restClient = restClient;
-
-            SetupRestClient();
-        }
-
-        private void SetupRestClient()
-        {
-            _restClient.BaseUrl = new Uri(_configuration.BaseUrl);
-            _restClient.Authenticator = _configuration.Authenticator;
+            _configuration = configuration;
+            _requestProcessorFactory = requestProcessorFactory;
+            _restClient = restClient;
         }
 
         public IRestResponse Execute(IEasyRestRequest request)
         {
+            SetupRestClient();
+
             var requestProcessor = _requestProcessorFactory.Create(request);
             var restRequest = requestProcessor.BuildRestRequest(request);
 
@@ -45,6 +39,8 @@ namespace EasyRestClient
 
         public T Execute<T>(IEasyRestRequest<T> request) where T : new()
         {
+            SetupRestClient();
+
             var requestProcessor = _requestProcessorFactory.Create(request);
             var restRequest = requestProcessor.BuildRestRequest(request);
 
@@ -79,6 +75,12 @@ namespace EasyRestClient
                     throw new EasyRestException(string.Format("Not authorized for endpoint: {0}",
                         response.Request.Resource));
             }
+        }
+
+        private void SetupRestClient()
+        {
+            _restClient.BaseUrl = new Uri(_configuration.BaseUrl);
+            _restClient.Authenticator = _configuration.Authenticator;
         }
     }
 }
