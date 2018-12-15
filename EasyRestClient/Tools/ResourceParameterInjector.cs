@@ -36,10 +36,17 @@ namespace EasyRestClient.Tools
                         continue;
                     }
 
-                    restRequest.AddParameter(parameterName, parameterValue, parameterTypeAttribute.Value);
+                    if (parameterTypeAttribute.Value == ParameterType.RequestBody)
+                    {
+                        restRequest.RequestFormat = request.RequestFormat;
+                        restRequest.AddBody(parameterValue);
+                    }
+                    else
+                    {
+                        restRequest.AddParameter(parameterName, parameterValue, parameterTypeAttribute.Value);
+                    }
                 }
             }
-
 
             return restRequest;
         }

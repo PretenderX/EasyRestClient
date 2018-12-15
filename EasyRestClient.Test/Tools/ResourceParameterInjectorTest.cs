@@ -36,12 +36,13 @@ namespace EasyRestClient.Test.Tools
         public string GetOrPost { get; set; }
 
         [ParameterType(ParameterType.RequestBody)]
-        [ParameterName("application/json")]
         public object Body { get; set; }
 
-        public string Resource { get; }
-        public Method Method { get; }
-        public DataFormat RequestFormat { get; }
+        public string Resource => "somewhere/something";
+
+        public Method Method => Method.GET;
+
+        public DataFormat RequestFormat => DataFormat.Json;
     }
 
     [TestClass]
@@ -101,7 +102,7 @@ namespace EasyRestClient.Test.Tools
                                                     p.Value.Equals(mockRequest.GetOrPost));
             result.Parameters.Should().Contain(p => p.Type == ParameterType.RequestBody &&
                                                     p.Name == "application/json" &&
-                                                    p.Value.Equals(mockRequest.Body));
+                                                    p.Value.Equals("{\"FirstName\":\"Lionel\",\"LastName\":\"Wu\"}"));
         }
     }
 }
