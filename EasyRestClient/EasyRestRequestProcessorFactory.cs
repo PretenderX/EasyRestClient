@@ -11,35 +11,6 @@ namespace EasyRestClient
         public static readonly Dictionary<Type, Type> RequestProcessorTypesMapping =
             new Dictionary<Type, Type>();
 
-        public static bool AutoRegistered;
-
-        /// <summary>
-        /// Calling this method will find all generic IEasyRestRequestProcessor<TRequest> implementations and register them automatically.
-        /// </summary>
-        public static void AutoRegisterAllProcessors()
-        {
-            if (AutoRegistered)
-            {
-                return;
-            }
-
-            var processorTypes = Utility.FindImplementationClasses<IEasyRestRequestProcessor>();
-
-            foreach (var processorType in processorTypes)
-            {
-                var processorKey = FindRequestType(processorType);
-
-                if (processorKey == null)
-                {
-                    continue;
-                }
-
-                AddProcesserToMapping(processorType, processorKey);
-            }
-
-            AutoRegistered = true;
-        }
-
         public static void Register<TRequest, TRequestProcesser>()
             where TRequestProcesser : IEasyRestRequestProcessor
         {
@@ -88,23 +59,34 @@ namespace EasyRestClient
         public EasyRestRequestProcessorFactory(IEasyRestRequestProcessorResolver easyRestRequestProcessorResolver)
         {
             _easyRestRequestProcessorResolver = easyRestRequestProcessorResolver;
-
-            AutoRegisterAllProcessors();
         }
 
         public IEasyRestRequestProcessor Create(IEasyRestRequest request)
         {
             var requestType = request.GetType();
-            var processorKey = RequestProcessorTypesMapping.Keys
-                .FirstOrDefault(type => type.IsAssignableFrom(requestType));
+            Type responseType = null;
+            IEasyRestRequestProcessor requestProcessor = null;
 
-            if (processorKey != null)
+            if (!RequestProcessorTypesMapping.TryGetValue(requestType, out var requestProcessorType))
             {
-                var processorType = RequestProcessorTypesMapping[processorKey];
-                return _easyRestRequestProcessorResolver.Resolve(processorType);
+                if (requestType.BaseType != null && requestType.BaseType.IsGenericType)
+                {
+                    responseType = requestType.BaseType.GetGenericArguments()[0];
+                }
+
+                requestProcessorType = responseType == null
+                    ? typeof(IEasyRestRequestProcessor<>).MakeGenericType(requestType)
+                    : typeof(IEasyRestRequestProcessor<,>).MakeGenericType(requestType, responseType);
             }
 
-            throw new ApplicationException("Can't find request processor for request type: " + requestType.FullName);
+            requestProcessor = _easyRestRequestProcessorResolver.Resolve(requestProcessorType);
+
+            if (requestProcessor == null)
+            {
+                throw new ApplicationException("Can't find request processor for request type: " + requestType.FullName);
+            }
+
+            return requestProcessor;
         }
     }
 }
