@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net;
 using EasyRestClient.Configuration;
 using EasyRestClient.EndpointTemplate;
 using EasyRestClient.Exception;
@@ -56,9 +55,9 @@ namespace EasyRestClient
 
         private static void DefualtResponseHandler(IRestResponse response)
         {
-            if (response == null)
+            if (response.IsSuccessful)
             {
-                throw new EasyRestException("Response is null for unknow reason.");
+                return;
             }
 
             if (response.ErrorException != null)
@@ -66,15 +65,7 @@ namespace EasyRestClient
                 throw new EasyRestException(response.ErrorMessage, response.ErrorException);
             }
 
-            switch (response.StatusCode)
-            {
-                case HttpStatusCode.OK:
-                    return;
-                case HttpStatusCode.NotFound:
-                    throw new EasyRestException($"Not found endpoint: {response.Request.Resource}");
-                case HttpStatusCode.Forbidden:
-                    throw new EasyRestException($"Not authorized for endpoint: {response.Request.Resource}");
-            }
+            throw new EasyRestException($"Request faild: {response.ResponseUri.OriginalString}\r\nResponse content: {response.Content}");
         }
 
         private void SetupRestClient()
