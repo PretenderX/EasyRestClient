@@ -7,6 +7,10 @@ namespace EasyRestClient.EndpointTemplate
     {
         protected IEasyRestRequest CurrentRequest;
 
+        public virtual void OnRestClientInitialized(IRestClient restClient)
+        {
+        }
+
         public virtual IRestRequest BuildRestRequest(IEasyRestRequest request)
         {
             CurrentRequest = request;
@@ -37,14 +41,8 @@ namespace EasyRestClient.EndpointTemplate
 
         public virtual IResourceParameterInjector ResourceParameterInjector
         {
-            get
-            {
-                return _resourceParameterInjector ?? (_resourceParameterInjector = new ResourceParameterInjector());
-            }
-            set
-            {
-                _resourceParameterInjector = value;
-            }
+            get => _resourceParameterInjector ?? (_resourceParameterInjector = new ResourceParameterInjector());
+            set => _resourceParameterInjector = value;
         }
 
         public sealed override IRestRequest BuildRestRequest(IEasyRestRequest request)

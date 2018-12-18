@@ -4,6 +4,8 @@ namespace EasyRestClient.EndpointTemplate
 {
     public interface IEasyRestRequestProcessor
     {
+        void OnRestClientInitialized(IRestClient restClient);
+
         IRestRequest BuildRestRequest(IEasyRestRequest request);
 
         IRestRequest BuildRestRequest<T>(IEasyRestRequest<T> request) where T : new();

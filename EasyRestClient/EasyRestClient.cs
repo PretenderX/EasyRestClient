@@ -24,10 +24,11 @@ namespace EasyRestClient
 
         public IRestResponse Execute(IEasyRestRequest request)
         {
-            SetupRestClient();
-
             var requestProcessor = _requestProcessorFactory.Create(request);
             var restRequest = requestProcessor.BuildRestRequest(request);
+
+            SetupRestClient();
+            requestProcessor.OnRestClientInitialized(_restClient);
 
             var response = _restClient.Execute(restRequest);
 
@@ -39,10 +40,11 @@ namespace EasyRestClient
 
         public T Execute<T>(IEasyRestRequest<T> request) where T : new()
         {
-            SetupRestClient();
-
             var requestProcessor = _requestProcessorFactory.Create(request);
             var restRequest = requestProcessor.BuildRestRequest(request);
+
+            SetupRestClient();
+            requestProcessor.OnRestClientInitialized(_restClient);
 
             var response = _restClient.Execute<T>(restRequest);
 
@@ -69,11 +71,9 @@ namespace EasyRestClient
                 case HttpStatusCode.OK:
                     return;
                 case HttpStatusCode.NotFound:
-                    throw new EasyRestException(string.Format("Not found endpoint: {0}",
-                        response.Request.Resource));
+                    throw new EasyRestException($"Not found endpoint: {response.Request.Resource}");
                 case HttpStatusCode.Forbidden:
-                    throw new EasyRestException(string.Format("Not authorized for endpoint: {0}",
-                        response.Request.Resource));
+                    throw new EasyRestException($"Not authorized for endpoint: {response.Request.Resource}");
             }
         }
 
