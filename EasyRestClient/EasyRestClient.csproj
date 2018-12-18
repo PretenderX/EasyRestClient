@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
-    <version>1.0.10</version>
+    <version>1.0.11</version>
     <PackageLicenseUrl>https://github.com/PretenderX/EasyRestClient/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/PretenderX/EasyRestClient</PackageProjectUrl>
     <PackageTags>REST RestSharp</PackageTags>
@@ -11,10 +11,7 @@
     <Authors>Lionel Wu</Authors>
     <Description>A lightly RESTful client development framework by using RestSharp.</Description>
     <Copyright></Copyright>
-    <PackageReleaseNotes>
-      Get ride using ParameterName attribute to set json body.
-      EasyRestRequestProcessorFactory: Remove AutoRegisterAllProcessors per capability issue and rewrite Create method.
-    </PackageReleaseNotes>
+    <PackageReleaseNotes>Extend OnRestClientInitialized event to IEasyRestRequestProcessor and rewrite DefualtResponseHandler of EasyRestClient.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
